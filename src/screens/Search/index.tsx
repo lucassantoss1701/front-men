@@ -54,7 +54,7 @@ export function Search() {
 
 
     const queryParams = queryString.stringify(requestBody);
-    const url = `transactions2?${queryParams}`;
+    const url = `transactions?${queryParams}`;
 
     setLoading(true);
     const result = await api.get(url);
