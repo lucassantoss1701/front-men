@@ -18,15 +18,26 @@ export function SearchForm({ onSubmit }: SearchFormProps) {
   const { register, handleSubmit } = useFormContext<SearchFormData>();
 
   const handleFormSubmit = (data: SearchFormData) => {
-    const initialDate = format(parse(data.initialDate, "dd/MM/yyyy", new Date()), "yyyy-MM-dd");
-  
-    const finalDate = format(parse(data.finalDate, "dd/MM/yyyy", new Date()), "yyyy-MM-dd");
+    let initialDate: string | undefined = "";
+    let finalDate: string | undefined = "";
+
+
+
+    if (data.initialDate !== ""){
+      initialDate = format(parse(data.initialDate, "dd/MM/yyyy", new Date()), "yyyy-MM-dd");
+
+    }
+
+    if (data.initialDate !== ""){
+       finalDate = format(parse(data.finalDate, "dd/MM/yyyy", new Date()), "yyyy-MM-dd");
+    }
 
     const transformedData: SearchFormData = {
       ...data,
       initialDate,
       finalDate,
     };
+
 
     onSubmit(transformedData);
   };

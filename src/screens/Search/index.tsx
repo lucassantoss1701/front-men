@@ -46,16 +46,27 @@ export function Search() {
   const handleFormSubmit = async (data: SearchFormData) => {
 
  
-    const requestBody: any = {
-      name: data.name,
-      "initial.date": data.initialDate,
-      "final.date": data.finalDate
+    const requestBody: any = {};
+
+    if (data.initialDate) {
+      requestBody['initial.date'] = data.initialDate;
     }
+
+    if (data.finalDate) {
+      requestBody['final.date'] = data.finalDate;
+    }
+
+    if (data.name) {
+      requestBody.name = data.name;
+    }
+
+  
 
 
     const queryParams = queryString.stringify(requestBody);
     const url = `transactions?${queryParams}`;
 
+    console.log(url)
     setLoading(true);
     const result = await api.get(url);
     setTransaction(result.data);
@@ -126,7 +137,7 @@ export function Search() {
                 <Tbody>
                   {currentPageData.map((transaction) => (
                     <Tr key={transaction.id}>
-                      <Td height="20%" width="25%">{transaction.data}</Td>
+                      <Td height="20%" width="25%">{transaction.date}</Td>
                       <Td height="20%" width="25%">{transaction.valence}</Td>
                       <Td height="20%" width="25%">{transaction.type_of_transaction}</Td>
                       <Td height="20%" width="25%">{transaction.operator_name}</Td>

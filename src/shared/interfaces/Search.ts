@@ -1,6 +1,6 @@
 export interface Transaction {
     id: string;   
-    data: string;
+    date: string;
     valence: string;
     type_of_transaction: string;
     operator_name: string;  
